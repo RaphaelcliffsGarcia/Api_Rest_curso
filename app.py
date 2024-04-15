@@ -1,6 +1,6 @@
 from flask import Flask 
 from flask_restful import Api 
-from purchase_orders import PurchaseOrders
+from purchase_orders.resources import PurchaseOrders
 
 app = Flask (__name__)
 api = Api(app)
