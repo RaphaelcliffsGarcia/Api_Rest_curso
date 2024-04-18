@@ -19,3 +19,22 @@ def test_post_purchase_orders(test_client):
   assert response.json['id']== obj['id']
   assert response.json['description'] == obj['description']
   assert response.json['items']==[]
+  
+def test_post_empty_id(test_client):
+  response = test_client.post(
+    '/purchase_orders',
+    data = json.dumps({'description':'Descrição'}),
+    content_type='application/json'
+  )
+  assert response.status_code == 400
+  assert response.json['message']['id'] == 'Informe um Id Valido'
+  
+def test_post_empty_description(test_client):
+  response = test_client.post(
+    '/purchase_orders',
+    data = json.dumps({'id':2}),
+    content_type='application/json'
+  )
+   
+  assert response.status_code == 400
+  assert response.json['message']['description'] == 'Informe uma Descrição Valida'
