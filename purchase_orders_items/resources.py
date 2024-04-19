@@ -16,4 +16,5 @@ class PurchaseOrdersItems(Resource):
     for po in purchase_orders:
       if po ['id'] == id:
         return jsonify(po['items'])
+      return jsonify({'message':'Pedido de id {} não encontrado'.format(id)})
     
