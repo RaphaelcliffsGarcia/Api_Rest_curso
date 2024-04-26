@@ -13,7 +13,7 @@ class PurchaseOrdersItemsModel(db.Model):
     self.purchase_order_id = purchase_order_id
   
   def as_dict(self):
-    return {c.name:getattr(c.name)for c in self.__table__.columns}
+    return {c.name:getattr(self,c.name)for c in self.__table__.columns}
   
   @classmethod
   def find_by_purchase_order_id(cls,purchase_order_id):
