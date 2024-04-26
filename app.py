@@ -4,10 +4,14 @@ from db import db
 from purchase_orders.resources import PurchaseOrders,PurchaseOrderById
 from purchase_orders_items.resources import PurchaseOrdersItems
 
-def create_app ():
+def create_app (env):
   app = Flask (__name__)
   api = Api(app)
-  app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:adm123@localhost:5432/python_course'
+  database ='python_course'
+  if env == 'testing':
+    database ='python_course_teste'
+  
+  app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:adm123@localhost:5432/{}'.format(database)
   app.config['SQLALCHEMY_MODIFICATIONS']=False
   db.init_app(app)
   api.add_resource(PurchaseOrders,'/purchase_orders')
